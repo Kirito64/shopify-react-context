@@ -1,0 +1,19 @@
+{
+  "name": "shopify-react-context",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kirito64/shopify-react-context.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kirito64/shopify-react-context/issues"
+  },
+  "homepage": "https://github.com/Kirito64/shopify-react-context#readme"
+}

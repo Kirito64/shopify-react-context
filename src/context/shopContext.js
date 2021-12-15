@@ -7,8 +7,8 @@ const client = Client.buildClient({
   // storefrontAccessToken: "dd4d4dc146542ba7763305d71d1b3d38",
   // domain: "graphql.myshopify.com",
 
-  storefrontAccessToken: "a29e5b8c549625e336e0b54765303d7f",
-  domain: "mowasdev1.myshopify.com",
+  storefrontAccessToken: "a7ce0cd08798ed1e61853de86626a066",
+  domain: "the-sastech-com.myshopify.com",
 });
 
 class ShopProvider extends Component {
@@ -17,8 +17,10 @@ class ShopProvider extends Component {
     product: {},
     checkout: {},
     isCartOpen: false,
+    collections: [],
+    collection: {},
   };
-
+  
   componentDidMount() {
     // this.createCheckout();
 
@@ -28,12 +30,13 @@ class ShopProvider extends Component {
     } else {
       this.createCheckout();
     }
+    this.fetchCollections();
   }
 
   createCheckout = async () => {
     const checkout = await client.checkout.create();
     localStorage.setItem("checkout", checkout.id);
-    await this.setState({ checkout: checkout });
+    this.setState({ checkout: checkout });
   };
 
   fetchCheckout = async (checkoutId) => {
@@ -72,12 +75,40 @@ class ShopProvider extends Component {
     return product;
   };
 
+  clearProduct = ()=>{
+    this.setState({product: null});
+  };
+
+  clearProducts = ()=>{
+    this.setState({products: []});
+  };
+
   closeCart = () => {
     this.setState({ isCartOpen: false });
   };
   openCart = () => {
     this.setState({ isCartOpen: true });
   };
+  
+  fetchCollections= async ()=>{
+    const collections = await client.collection.fetchAll();
+    this.setState({collections: collections})
+    return collections
+  }
+  fetchCollection = async (id)=>{
+
+    const collection = await client.collection.fetchByHandle(id);
+    this.setState({collection: collection});
+    // this.setState({products: collection.products});
+    
+    return collection.products
+  }
+
+  clearCollection = ()=>{
+    this.setState({collection: null})
+  }
+
+
 
   render() {
     return (
@@ -89,6 +120,11 @@ class ShopProvider extends Component {
           closeCart: this.closeCart,
           openCart: this.openCart,
           addItemToCheckout: this.addItemToCheckout,
+          clearProduct: this.clearProduct,
+          clearProducts: this.clearProducts,
+          fetchCollections: this.fetchCollections,
+          fetchCollection : this.fetchCollection,
+          clearCollection: this.clearCollection,
         }}
       >
         {this.props.children}

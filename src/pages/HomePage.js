@@ -1,139 +1,85 @@
-import React, { useContext, useEffect }  from 'react'
+import React, { useContext, useEffect, useState }  from 'react'
 import { ShopContext } from '../context/shopContext'
-import { Text, Div, Row, Col, Container } from "atomize";
-import { Link } from 'react-router-dom'
+import {Row, Col, Container, Pagination, PageItems} from "react-bootstrap";
+
 import Loading from '../components/Loading'
+import ProductCard from '../components/ProductCard'
+
+const ProductsPage = () => {
+    const {fetchAllProducts, products, clearProducts,} = useContext(ShopContext)
+    const [page, setPage] = useState(1);
+    const itemper = 20;
+    let lastitem = page*itemper;
+    let firstitem = lastitem - itemper;
+    let items = products.slice(firstitem, lastitem);
 
 
-const HomePage = () => {
-    const {fetchAllProducts, products} = useContext(ShopContext)
 
     useEffect(() => {
         fetchAllProducts()
         return () => {
             // cleanup
+            clearProducts();
         };
-    }, [fetchAllProducts])
-    
 
+        
+    }, [fetchAllProducts, clearProducts])
+
+    const handlePrev = () =>{
+        if(page-1 >= 1)
+            setPage(page-1);
+        
+    }
+
+
+    const handleNext = ()=>{
+        if(page +1 <= Math.ceil(products.length / itemper))
+            setPage(page+1);
+    }
      
+    const RenderItems = ()=>{
+                            const Items = [];
 
-    if (!products) return <Loading />
+                            for(let i =1 ; i<= Math.ceil(products.length/itemper); i++)
+                            {
+                                console.log(products.length)
+                                Items.push(
+
+                                    <Pagination.Item key={i} active={i === page}>
+                                        {i}
+                                    </Pagination.Item>  
+                                )
+                            }
+
+                            return Items;
+                        }
+    if (products.length === 0) return <Loading />
+
+
     return (
-        <Container>
-            <Row>
-                {products.map(product => {
+        <Container className = "d-flex flex-column justify-content-center min-vw-100 max-vw-100">
+            <h1 className= "my-5 mx-auto">Products</h1>
+            <Row className = "row-cols-xl-4 row-cols-lg-3 row-cols-md-2 row-cols-sm-1 max-vw-100">
+                {items.map((product, key)=>{
+                    return(
+                        <Col className = "d-flex justify-content-center p-0 " key={key}>
+                                <ProductCard product={product}></ProductCard>
+                        </Col>
+                    )
+                })}     
+            </Row>
 
-                    var  img = product.images[0]? product.images[0].src:"";
-                    return(<Col key={product.id} size="3" >
-                        <Link to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
-                            <Div p="2rem">
-                                <Div 
-                                    h="20rem"
-                                    bgImg={img}
-                                    bgSize="cover"
-                                    bgPos="center center"
-                                    shadow="3"
-                                    hoverShadow="4"
-                                    transition="0.3s"
-                                    m={{ b: "1.5rem" }}
-                                    >
-                                </Div>
-                                <Text tag="h1" textWeight="300" textSize="subheader" textDecor="none" textColor="black500">{product.title}</Text>
-                                <Text tag="h2" textWeight="300" textSize="body" textDecor="none" textColor="gray500">${product.variants[0].price}</Text>
-                            </Div>
-                        </Link>
-                    </Col>)})}
-                    {products.map(product => {
-
-                    var  img = product.images[0]? product.images[0].src:"";
-                    return(<Col key={product.id} size="3" >
-                        <Link to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
-                            <Div p="2rem">
-                                <Div 
-                                    h="20rem"
-                                    bgImg={img}
-                                    bgSize="cover"
-                                    bgPos="center center"
-                                    shadow="3"
-                                    hoverShadow="4"
-                                    transition="0.3s"
-                                    m={{ b: "1.5rem" }}
-                                    >
-                                </Div>
-                                <Text tag="h1" textWeight="300" textSize="subheader" textDecor="none" textColor="black500">{product.title}</Text>
-                                <Text tag="h2" textWeight="300" textSize="body" textDecor="none" textColor="gray500">${product.variants[0].price}</Text>
-                            </Div>
-                        </Link>
-                    </Col>)})}
-                    {products.map(product => {
-
-                    var  img = product.images[0]? product.images[0].src:"";
-                    return(<Col key={product.id} size="3" >
-                        <Link to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
-                            <Div p="2rem">
-                                <Div 
-                                    h="20rem"
-                                    bgImg={img}
-                                    bgSize="cover"
-                                    bgPos="center center"
-                                    shadow="3"
-                                    hoverShadow="4"
-                                    transition="0.3s"
-                                    m={{ b: "1.5rem" }}
-                                    >
-                                </Div>
-                                <Text tag="h1" textWeight="300" textSize="subheader" textDecor="none" textColor="black500">{product.title}</Text>
-                                <Text tag="h2" textWeight="300" textSize="body" textDecor="none" textColor="gray500">${product.variants[0].price}</Text>
-                            </Div>
-                        </Link>
-                    </Col>)})}
-                    {products.map(product => {
-
-                    var  img = product.images[0]? product.images[0].src:"";
-                    return(<Col key={product.id} size="3" >
-                        <Link to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
-                            <Div p="2rem">
-                                <Div 
-                                    h="20rem"
-                                    bgImg={img}
-                                    bgSize="cover"
-                                    bgPos="center center"
-                                    shadow="3"
-                                    hoverShadow="4"
-                                    transition="0.3s"
-                                    m={{ b: "1.5rem" }}
-                                    >
-                                </Div>
-                                <Text tag="h1" textWeight="300" textSize="subheader" textDecor="none" textColor="black500">{product.title}</Text>
-                                <Text tag="h2" textWeight="300" textSize="body" textDecor="none" textColor="gray500">${product.variants[0].price}</Text>
-                            </Div>
-                        </Link>
-                    </Col>)})}{products.map(product => {
-
-                    var  img = product.images[0]? product.images[0].src:"";
-                    return(<Col key={product.id} size="3" >
-                        <Link to={`/product/${product.id}`} style={{ textDecoration: 'none' }}>
-                            <Div p="2rem">
-                                <Div 
-                                    h="20rem"
-                                    bgImg={img}
-                                    bgSize="cover"
-                                    bgPos="center center"
-                                    shadow="3"
-                                    hoverShadow="4"
-                                    transition="0.3s"
-                                    m={{ b: "1.5rem" }}
-                                    >
-                                </Div>
-                                <Text tag="h1" textWeight="300" textSize="subheader" textDecor="none" textColor="black500">{product.title}</Text>
-                                <Text tag="h2" textWeight="300" textSize="body" textDecor="none" textColor="gray500">${product.variants[0].price}</Text>
-                            </Div>
-                        </Link>
-                    </Col>)})}
+            <Row className = "justify-content-center min-vw-100">
+                <Col className = "d-flex justify-content-center">
+                    <Pagination>
+                        <Pagination.Prev onClick = {handlePrev} />
+                            {RenderItems()}
+                        <Pagination.Next  onClick = {handleNext}/>
+                    </Pagination>
+                </Col>
             </Row>
         </Container>
     )
 }
 
-export default HomePage
+export default ProductsPage

@@ -31,6 +31,11 @@ const NavbarB = ()=>{
     const [navbar, setNavbar]= useState(false)
     
     const location = useLocation()
+    var cols = collections;
+
+    cols = cols.filter((item)=>{
+        return item.handle !== "frontpage"
+    })
     const changeBackground = () => {
     if (window.scrollY >= 66) {
       setNavbar(true)
@@ -41,6 +46,7 @@ const NavbarB = ()=>{
 
   useEffect(() =>{
     changeBackground();
+    console.log(cols)
     window.addEventListener("scroll", changeBackground)
   })
 
@@ -66,8 +72,8 @@ const NavbarB = ()=>{
                 <Nav.Link href ="/products" className = {navbar || location.pathname !== "/"? " nb-tra": "nb-tra" }>Products</Nav.Link>
                 <Nav.Link href="#" className = {navbar || location.pathname !== "/"? "nb-tra": "nb-tra" }>Contact Us</Nav.Link>
                 <NavDropdown title = "Categories">
-                  {collections.map((col, key)=>{
-                    return<NavDropdown.Item key = {key} href = {"/collections/"+col.handle}>{col.title}</NavDropdown.Item>
+                  {cols.map((col, key)=>{
+                      return<NavDropdown.Item key = {key} href = {"/collections/"+col.handle}>{col.title}</NavDropdown.Item>
                   })}
                 </NavDropdown>
               </Nav>
@@ -102,7 +108,7 @@ const NavbarB = ()=>{
                 <Nav.Link href ="/products" className = {"nb-tra"}>Products</Nav.Link>
                 <Nav.Link href="#" className = {"nb-tra"}>Contact Us</Nav.Link>
                 <NavDropdown title = "Categories" className = "nb-tra">
-                  {collections.map((col, key)=>{
+                  {cols.map((col, key)=>{
                     return<NavDropdown.Item key = {key} href = {"/collections/"+col.handle}>{col.title}</NavDropdown.Item>
                   })}
                 </NavDropdown>

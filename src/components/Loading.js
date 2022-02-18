@@ -4,7 +4,7 @@ import { Div, Icon } from "atomize";
 const Loading = () => {
   return (
     <Div
-      bg="transparent"
+      bg="white"
       d="flex"
       align="center"
       justify="center"
@@ -13,9 +13,9 @@ const Loading = () => {
       bottom="0"
       right="0"
       left="0"
-      style={{ zIndex: -1 }}
+      style={{ zIndex: 2, minHeight: "100vh", minWidth: "100vw" }}
     >
-      <Icon name="Loading3" size="4rem" color="brand500" />
+      <Icon name="Loading3" size="8rem" color="brand500" />
     </Div>
   );
 };

@@ -1,0 +1,11 @@
+.white{
+	color: black !important;
+}
+
+.nb-tra{
+	transition: all .5s ease-in-out;
+}
+
+.nav-shadow{
+	border-bottom: 1px solid #ccc9c9;
+}

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Div, SideDrawer, Text, Row, Col, Anchor, Button, Container, Icon } from "atomize";
 import {ShopContext} from '../context/shopContext'
 
@@ -6,10 +6,11 @@ const Cart = () => {
 
     const { isCartOpen, closeCart, checkout } = useContext(ShopContext)
 
+
     if (checkout.lineItems) {
         return (
-            <SideDrawer isOpen={isCartOpen} onClose={closeCart}>
-                <Container d="flex" flexDir="column" h="100%">
+            <SideDrawer isOpen={isCartOpen} onClose={closeCart} >
+                <Container d="flex" flexDir="column" h="100%" style={{zIndex: 10000000}}>
                     <Row justify="space-between" border={{ b: '1px solid' }} p="0.7rem" borderColor="gray300">
                         <Text tag="h1" textColor="black500" textSize="paragraph" hoverTextColor="black700" transition="0.3s">Bag</Text>
                         <Anchor onClick={() => closeCart()} ><Icon name="Cross" color="black500"/></Anchor>
@@ -22,17 +23,18 @@ const Cart = () => {
                             :
                             <>
                                 {checkout.lineItems && checkout.lineItems.map(item => (
-                                    <Row key={item.id} p={{ t:"5px" }}>
+                                    <Row key={item.id} p={{ t:"5px", b:"10px" }}
+                                     style = {{borderBottom: "1px solid black", margin: "0px 5px"}}>
                                         <Col>
                                             <Div bgImg={item.variant.image.src} bgSize="cover" bgPos="center" h="5rem" w="4rem"/>
                                         </Col>
                                         <Col>
                                             <Text>{item.title}</Text>
-                                            <Text>{item.variant.title}</Text>
+                                            <Text>{item.variant.title=== "Default Title" ? "": item.variant.title}</Text>
                                             <Text>{item.quantity}</Text>
                                         </Col>
                                         <Col>
-                                            <Text>{item.variant.price}</Text>
+                                            <Text>Rs {parseInt(item.variant.price)}</Text>
                                         </Col>
                                     </Row>
                                 ))}

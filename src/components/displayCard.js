@@ -1,6 +1,6 @@
 import React from 'react'; 
 import AnimatedButton from "./animatedButton.js";
-import {Link, Redirect} from "react-router-dom"
+import {Link} from "react-router-dom"
 import s from "./displayCard.module.css";
 
 
@@ -16,13 +16,16 @@ const DisplayCard = (props)=>{
 							{props.children}
 						</p>
 						
-						<div className= "mt-5 mb-5">
+						<Link to = {props.href}>
+							<div className= "mt-5 mb-5">
 							
-								<AnimatedButton click = {(e)=>{e.preventDefault();}}>
+								<AnimatedButton >
 									Shop Here
 								</AnimatedButton>
 							
-						</div>
+							</div>
+						</Link>
+						
 						
 				</div>
 				</Link>

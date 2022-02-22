@@ -55,13 +55,11 @@ const NavbarB = ()=>{
         <Navbar collapseOnSelect expand="lg" bg={navbar || location.pathname !== "/"? "white":"transparent"} variant={navbar? "light": "dark"} fixed ="top" style = {{padding: "0.9rem"}} className={navbar || location.pathname  !== "/"? "nb-tra nav-shadow": "nb-tra"}>
           <Container>
             <Navbar.Brand href="/" className = {navbar || location.pathname !== "/"? "white nb-tra": "nb-tra" }  >
-
               <img
                 alt=""
-                src="/logo.png"
-                width="30"
-                height="30"
-                className="d-inline-block align-top"
+                src="/logo.svg"
+                width="100"
+                className = {navbar || location.pathname !== "/"? "white nb-tra d-inline-block": "nb-tra d-inline-block" }
               />
             TheSASTech
             </Navbar.Brand >
@@ -94,10 +92,9 @@ const NavbarB = ()=>{
               
               <img
                 alt=""
-                src="/logo.png"
-                width="30"
-                height="30"
-                className="d-inline-block align-top"
+                src="/logo.svg"
+                width="100"
+                className="d-inline-block white"
               />
             TheSASTech
             </Navbar.Brand >

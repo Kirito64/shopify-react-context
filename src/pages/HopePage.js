@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container"
 import s from "./homepage.module.css"
 import Button from "react-bootstrap/Button"
 import DisplayCard from "../components/displayCard";
+import {Link} from "react-router-dom"
 
 const HomePage = () =>{
 
@@ -16,12 +17,14 @@ const HomePage = () =>{
 				<img src = "display1.png" className = {`${s.heroImage}`} alt=""/>
 				<Container className = {`${s.heroText}`}>
 					<p className = {`h1 h-100`} >
-					lorem ipsum dolor sit amet,
-					sit amet
+					Enter the world of performance		
 					</p>
-					<Button className = {s.button_store}>
+					<Link to = "/products">
+						<Button className = {s.button_store}>
 						Store
 					</Button>
+					</Link>
+					
 				</Container>
 			</section>
 			

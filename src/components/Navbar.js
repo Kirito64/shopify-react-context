@@ -57,9 +57,9 @@ const NavbarB = ()=>{
             <Navbar.Brand href="/" className = {navbar || location.pathname !== "/"? "white nb-tra": "nb-tra" }  >
               <img
                 alt=""
-                src="/logo.svg"
+                src={navbar || location.pathname !== "/"? "logo_black.svg": "logo.svg"}
                 width="100"
-                className = {navbar || location.pathname !== "/"? "white nb-tra d-inline-block": "nb-tra d-inline-block" }
+                className = {navbar || location.pathname !== "/"? "nb-tra mx-2 d-inline-block": "nb-tra mx-2 d-inline-block" }
               />
             TheSASTech
             </Navbar.Brand >
@@ -92,9 +92,9 @@ const NavbarB = ()=>{
               
               <img
                 alt=""
-                src="/logo.svg"
+                src="/logo_black.svg"
                 width="100"
-                className="d-inline-block white"
+                className="d-inline-block white mx-2"
               />
             TheSASTech
             </Navbar.Brand >

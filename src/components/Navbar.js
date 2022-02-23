@@ -61,7 +61,6 @@ const NavbarB = ()=>{
                 width="100"
                 className = {navbar || location.pathname !== "/"? "nb-tra mx-2 d-inline-block": "nb-tra mx-2 d-inline-block" }
               />
-            TheSASTech
             </Navbar.Brand >
             <Navbar.Toggle aria-controls="responsive-navbar-nav" variant = {"light"}/>
             <Navbar.Collapse id = "responsive-navbar-nav" >
@@ -96,7 +95,6 @@ const NavbarB = ()=>{
                 width="100"
                 className="d-inline-block white mx-2"
               />
-            TheSASTech
             </Navbar.Brand >
             <Navbar.Toggle aria-controls="responsive-navbar-nav" variant = {"light"} />
             <Navbar.Collapse id = "responsive-navbar-nav">
